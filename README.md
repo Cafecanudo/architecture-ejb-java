@@ -56,9 +56,124 @@ o desenvolvedor possa consultar os serviços disponíves afim de não criar um n
 
 
 
+# Implmentação
+### Resource Rest
+Criar dentro do [pacote](softbox-elan-service\src\main\java\br\com\softbox\elan\services\resources)
+a inteface DemoResource(Nome+Resource).
+Deve existir uma interface para que seja usada as anotações do [Swagger](https://swagger.io/docs/specification/2-0/adding-examples/)
+para documentar o serviço, afim de não deixar a Classe poluída.
 
+```java
+@Path("/demo")
+@Api(value = "Demo manager")
+@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Quando a solicitação for executada com sucesso."),
+        @ApiResponse(code = 400, message = "Quando algum parâmetro obrigatório não for informado ou for inválido, será exibida a seguinte mensagem de resposta: “Campo(s) obrigatório(s) não preenchidos”."),
+        @ApiResponse(code = 403, message = "Acesso negado. Token inválido"),
+        @ApiResponse(code = 404, message = "Quando o registro não for encontrado."),
+        @ApiResponse(code = 500, message = "Erro interno do servidor (Internal Server Error)")})
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+public interface DemoResource {
 
+    @GET
+    @ApiOperation(value = "getAll", notes = "Obter lista de todos registro.")
+    ResultadoConsulta<Dados> getAll();
 
+    @POST
+    @ApiOperation(value = "insert", notes = "Insere um novo registro no banco")
+    ResultadoConsulta insert();
+
+    @PUT
+    @ApiOperation(value = "update", notes = "Atualiza todas as colunas do registro")
+    ResultadoConsulta update();
+
+    @PATCH
+    @ApiOperation(value = "updateUnique", notes = "Atualiza a coluna especifica do registro")
+    ResultadoConsulta updateUnique();
+
+    @DELETE
+    @ApiOperation(value = "delete", notes = "Deleta/Remove um novo registro do banco")
+    void delete();
+
+}
+```
+Depois no pacote impl crie sua implementação da interface.
+```java
+@RequestScoped
+public class DemoResourceImpl implements DemoResource {
+
+    @Override
+    public ResultadoConsulta<Dados> getAll() {
+        return null;
+    }
+
+    @Override
+    public ResultadoConsulta insert() {
+        return null;
+    }
+
+    @Override
+    public ResultadoConsulta update() {
+        return null;
+    }
+
+    @Override
+    public ResultadoConsulta updateUnique() {
+        return null;
+    }
+
+    @Override
+    public void delete() {
+
+    }
+}
+```
+
+Após adicionar a implementação na injeção do Swagger para que inicie sua documentação.
+[JaxRsActivator](softbox-elan-service/src/main/java/br/com/softbox/elan/services/config/JaxRsActivator.java)
+*br.com.softbox.elan.services.config.JaxRsActivator*
+````java
+@ApplicationPath("/rest")
+public class JaxRsActivator extends JaxRsConfig {
+
+    @Override
+    Set<Class<?>> getRestResourceClass(Set<Class<?>> resources) {
+        resources.add(........class);
+        resources.add(........class);
+        resources.add(DemoResource.class); <<-----
+        return resources;
+    }
+}
+````
+
+### Services
+Criar interface dentro do [pacote](softbox-elan-ejb\src\main\java\br\com\softbox\elan\ejb\services\UserService.java)
+````java
+public interface DemoService {
+    ResultadoConsulta<Dados> getAll();
+}
+````
+
+Depois usa implementação
+````java
+@Stateless
+@Dependent
+@Local(UserService.class)
+public class UserServiceImpl implements UserService {
+
+    @Inject
+    private MeuRepository meuRepository;
+
+    @Override
+    public ResultadoConsulta<Dados> getAll() {
+        ResultadoConsulta<Dados> resultado = meuRepository.consultaSimples("user").consultar();
+        return resultado;
+    }
+}
+````
+
+Não esqueça das anotações nas classe. Feito isso tudo certo, somente rode o projeto.
 
 
 
@@ -70,6 +185,7 @@ o desenvolvedor possa consultar os serviços disponíves afim de não criar um n
 
 
 ###Contato
+Qualquer dúvida.
 Wellton S. Barros
 - welltonbarros@softbox.com.br
 - cafecanudo@gmail.com<br/>
