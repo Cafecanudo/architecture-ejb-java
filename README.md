@@ -58,7 +58,7 @@ o desenvolvedor possa consultar os serviços disponíves afim de não criar um n
 
 # Implmentação
 ### Resource Rest
-Criar dentro do [pacote](softbox-elan-service\src\main\java\br\com\softbox\elan\services\resources)
+Criar dentro do [pacote](softbox-elan-service/src/main/java/br/com/softbox/elan/services/resources)
 a inteface DemoResource(Nome+Resource).
 Deve existir uma interface para que seja usada as anotações do [Swagger](https://swagger.io/docs/specification/2-0/adding-examples/)
 para documentar o serviço, afim de não deixar a Classe poluída.
@@ -148,7 +148,7 @@ public class JaxRsActivator extends JaxRsConfig {
 ````
 
 ### Services
-Criar interface dentro do [pacote](softbox-elan-ejb\src\main\java\br\com\softbox\elan\ejb\services\UserService.java)
+Criar interface dentro do [pacote](softbox-elan-ejb/src/main/java/br/com/softbox/elan/ejb/services/UserService.java)
 ````java
 public interface DemoService {
     ResultadoConsulta<Dados> getAll();
