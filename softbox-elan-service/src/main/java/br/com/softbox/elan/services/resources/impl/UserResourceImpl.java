@@ -7,11 +7,12 @@ import br.com.softbox.elan.services.resources.UserResource;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 @RequestScoped
 public class UserResourceImpl implements UserResource {
 
-    @EJB
+    @Inject
     private UserService userService;
 
     @Override
