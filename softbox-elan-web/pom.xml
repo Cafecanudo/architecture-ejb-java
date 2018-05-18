@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>softbox-elan</artifactId>
+        <groupId>br.com.softbox.elan</groupId>
+        <version>${elan.version}</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>softbox-elan-web</artifactId>
+    <packaging>war</packaging>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <!--Criar war do projeto-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>src/public</directory>
+                        </resource>
+                        <resource>
+                            <directory>includes</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>desenv</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <ambiente>dev</ambiente>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>homolog</id>
+            <properties>
+                <ambiente>hom</ambiente>
+            </properties>
+
+            <build>
+                <plugins>
+                    <!--Executar a configuracoes do React build-->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <!--Instalar lib do angular e node-->
+                            <execution>
+                                <id>npm install</id>
+                                <configuration>
+                                    <workingDirectory>./src/</workingDirectory>
+                                    <executable>npm</executable>
+                                    <arguments>
+                                        <argument>install</argument>
+                                    </arguments>
+                                </configuration>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                            <!--Executar o build do projeto-->
+                            <execution>
+                                <id>build</id>
+                                <inherited>npm install</inherited>
+                                <configuration>
+                                    <workingDirectory>./src/</workingDirectory>
+                                    <executable>npm</executable>
+                                    <arguments>
+                                        <argument>run</argument>
+                                        <argument>build:${ambiente}</argument>
+                                    </arguments>
+                                </configuration>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <ambiente>prod</ambiente>
+            </properties>
+            <build>
+                <plugins>
+                    <!--Executar a configuracoes do React build-->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <!--Instalar lib do angular e node-->
+                            <execution>
+                                <id>npm install</id>
+                                <configuration>
+                                    <workingDirectory>./src/</workingDirectory>
+                                    <executable>npm</executable>
+                                    <arguments>
+                                        <argument>install</argument>
+                                    </arguments>
+                                </configuration>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                            <!--Executar o build do projeto-->
+                            <execution>
+                                <id>build</id>
+                                <inherited>npm install</inherited>
+                                <configuration>
+                                    <workingDirectory>./src/</workingDirectory>
+                                    <executable>npm</executable>
+                                    <arguments>
+                                        <argument>run</argument>
+                                        <argument>build:${ambiente}</argument>
+                                    </arguments>
+                                </configuration>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>softbox-elan</artifactId>
+		<groupId>br.com.softbox.elan</groupId>
+		<version>${elan.version}</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>softbox-elan-ejb</artifactId>
+	<dependencies>
+        
+		<!-- Libs -->
+        <dependency>
+            <groupId>br.com.softbox.core</groupId>
+            <artifactId>softbox-core-persistencia</artifactId>
+            <version>1.2-201701201646</version>
+        </dependency>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>${javaee.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!--Testes -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+	
+	<build>
+        <finalName>${project.artifactId}</finalName>
+        <filters>
+            <filter>src/main/filters/filter.properties</filter>
+            <filter>src/main/filters/filter-${ambiente}.properties</filter>
+        </filters>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/persistence.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+	<profiles>
+        <profile>
+            <id>desenv</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <ambiente>dev</ambiente>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>homolog</id>
+            <properties>
+                <ambiente>hom</ambiente>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <ambiente>prod</ambiente>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
