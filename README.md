@@ -175,6 +175,28 @@ public class UserServiceImpl implements UserService {
 
 Não esqueça das anotações nas classe. Feito isso tudo certo, somente rode o projeto.
 
+### Finalizando
+
+E para finalizar, volte ao seu **Resource** adicione a injeção do seu serviço:
+````java
+@RequestScoped
+public class DemoResourceImpl implements DemoResource {
+
+    @Inject
+    private DemoService demoService;
+    
+    @Override
+    public ResultadoConsulta<Dados> getAll() {
+        /*Exemplo do uso*/
+        return demoService.getAll();
+    }
+
+    ...
+    ......
+    .........
+}
+````
+
 
 
 
