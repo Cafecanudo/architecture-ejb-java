@@ -1,0 +1,11 @@
+@import "imports/inc";
+
+html, body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    background: blue;
+}
