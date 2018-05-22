@@ -1,6 +1,10 @@
 @import "imports/inc";
 @import "imports/_adm.css";
 
+body, html{
+    height: 100%;
+    background: #f4f6f9;
+}
 .menu-open {
     .nav-treeview {
         display: block;
@@ -21,11 +25,14 @@
 }
 
 .main-footer {
-    position: fixed;
+    /*position: fixed;
     bottom: 0;
     right: 0;
     left: 0;
-    z-index: 100;
+    z-index: 100;*/
+    color: #b7b5b5;
+    text-align: center;
+    font-size: 12px;
 }
 
 .sidebar-dark-primary {
@@ -39,5 +46,18 @@
                 background-color: #f05722;
             }
         }
+    }
+}
+
+.container-full{
+    .content-wrapper{
+        margin-top: 15px;
+        height: 100%;
+    }
+    .content-header, .main-footer{
+        display: none;
+    }
+    .navbar{
+        padding: 0;
     }
 }

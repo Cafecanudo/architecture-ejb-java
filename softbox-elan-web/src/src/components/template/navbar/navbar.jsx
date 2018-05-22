@@ -22,7 +22,7 @@ export default class Navbar extends Component {
     return (
       <nav className="main-header navbar navbar-expand bg-white navbar-light border-bottom">
         <Menu links={this.state.links}/>
-        <Badge bellslist={this.state.bellslist}/>
+        <Badge widgetsAction={this.props.widgetsAction} actionFullscreen={this.props.actionFullscreen} bellslist={this.state.bellslist}/>
       </nav>
     )
   }

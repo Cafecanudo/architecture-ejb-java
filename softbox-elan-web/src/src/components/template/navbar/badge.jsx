@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 
 import BadgeBellItem from './badge-bell-item'
 
@@ -11,8 +11,23 @@ export default props => {
     ))
   }
 
+  const widgetAlerta = () => {
+    props.widgetsAction(0, 'danger');
+  }
+
   return (
     <ul className="navbar-nav ml-auto">
+      <li className="nav-item dropdown">
+        <a className="nav-link" data-toggle="dropdown" href="#">
+          <i className="fa fa-tasks" aria-hidden="true"></i>
+        </a>
+        <div className="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+
+          {/*{_id: 0, message: 'Mensagem de Email recebida', icon: 'envelope', tempo: 3, tdisplay: 'min'},
+        {_id: 1, message: 'Integração Sefaz Falhou', icon: 'file', tempo: 1, tdisplay: 'seg'},*/}
+          <BadgeBellItem item={{_id: 0, message: 'Widget Alerta', icon: 'bolt'}} click={widgetAlerta}/>
+        </div>
+      </li>
       <li className="nav-item dropdown">
         <a className="nav-link" data-toggle="dropdown" href="#">
           <i className="fa fa-bell-o"></i>
@@ -28,8 +43,9 @@ export default props => {
         </div>
       </li>
       <li className="nav-item">
-        <a className="nav-link" style={{cursor: 'pointer'}} title="Maximizar Dashboard">
-          <i className="fa fa-window-maximize" aria-hidden="true"></i>
+        <a className="nav-link" style={{cursor: 'pointer'}} title="Modo Televisão"
+           onClick={props.actionFullscreen}>
+          <i className="fa fa-television" aria-hidden="true"></i>
         </a>
       </li>
     </ul>

@@ -41,7 +41,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {from: 'node_modules/font-awesome/fonts', to: 'fonts'},
-      {from: 'node_modules/ionicons/dist/fonts', to: 'fonts'},
+      {from: 'node_modules/ionicons/dist/fonts', to: 'fonts'}
     ]),
     new ExtractTextPlugin('app.css'),
   ],
