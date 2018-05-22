@@ -1,3 +1,43 @@
 @import "imports/inc";
+@import "imports/_adm.css";
 
-@import 'imports/_adm.css';
+.menu-open {
+    .nav-treeview {
+        display: block;
+    }
+}
+
+.nav-sidebar {
+    > .nav-item {
+        height: 40px;
+        overflow: hidden;
+
+        @include fn-anim-transition-eio(0.3);
+
+        .nav-treeview {
+            display: block;
+        }
+    }
+}
+
+.main-footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.sidebar-dark-primary {
+    .nav-sidebar {
+        > .nav-item {
+            > .nav-treeview {
+                background: #3b4046;
+            }
+
+            > .nav-link.active {
+                background-color: #f05722;
+            }
+        }
+    }
+}

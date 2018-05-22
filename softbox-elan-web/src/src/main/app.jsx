@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 
 import '../@core/dependencies'
 import Navbar from '../components/template/navbar/navbar'
-import Sidebar from "../components/template/sidebar/sidebar";
+import Sidebar from '../components/template/sidebar/sidebar';
+import Footer from '../components/template/footer/footer'
 
 export default class AppComponent extends Component {
 
@@ -146,12 +147,7 @@ export default class AppComponent extends Component {
 
 
         {/*Main Footer*/}
-        <footer className="main-footer">
-          <div className="float-right d-none d-sm-inline">
-            SOFTBOX
-          </div>
-          <strong>Copyright &copy; 2018 <a href="#">www.softbox.com.br</a>.</strong> Todos direitos reservados.
-        </footer>
+        <Footer/>
       </div>
     )
   }

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 export default class Menu extends Component {
 
@@ -8,21 +8,34 @@ export default class Menu extends Component {
       usuario: props.usuario,
       menus: [
         {
-          icon: 'dashboard', display: 'Dashboard',
+          icon: 'dashboard', display: 'Dashboard', open: true,
           menus: [
-            {url: '/Resumo', icon: 'circle-o', display: 'Resumo'}
+            { url: '/Resumo', icon: 'line-chart', display: 'Resumo' },
+            { url: '/Resumo', icon: 'area-chart', display: 'Contingência' },
+            { url: '/Resumo', icon: 'bar-chart', display: 'Notas Divegentes' }
           ]
         },
         {
-          url: '/settings', icon: 'sliders', display: 'Configurações'
+          url: '/settings', icon: 'television', display: 'Modo Monitor'
         }
       ]
     }
   }
 
+  componentDidMount() {
+    $('.nav-sidebar .has-treeview .nav-link').click(function () {
+      if ($(this).parent().hasClass('menu-open')) {
+        $(this).removeClass('active').parent().removeClass('menu-open').css({ height: 40 });
+      } else {
+        $(this).addClass('active').parent().addClass('menu-open')
+          .css({ height: ($(this).parent().height() + $(this).next().height() + 5) })
+      }
+    })
+  }
+
   loadMenus() {
     return this.state.menus.map((_it, i) => (
-      <li key={i} className="nav-item has-treeview menu-open">
+      <li key={i} className="nav-item has-treeview">
         <a href={_it.url || '#'} className="nav-link">
           <i className={'nav-icon fa fa-' + _it.icon}></i>
           <p>
@@ -52,8 +65,22 @@ export default class Menu extends Component {
     return (
       <nav className="mt-2">
         <ul className="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-            data-accordion="false">
+          data-accordion="false">
           {this.loadMenus()}
+
+          <li className="nav-header">Configurações</li>
+          <li className="nav-item">
+            <a href="#" className="nav-link">
+              <i className="nav-icon fa fa-sliders"></i>
+                <p>Geral</p>
+            </a>
+          </li>
+          <li className="nav-item">
+            <a href="#" className="nav-link">
+              <i className="nav-icon fa fa-bar-chart"></i>
+                <p>Graficos</p>
+            </a>
+          </li>
           {/*<li className="nav-item has-treeview menu-open">
 
 

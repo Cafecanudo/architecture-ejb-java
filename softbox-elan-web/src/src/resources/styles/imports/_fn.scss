@@ -1,0 +1,6 @@
+@mixin fn-anim-transition-eio($time) {
+    -webkit-transition: all #{$time}s ease-in-out;
+    -moz-transition: all #{$time}s ease-in-out;
+    -o-transition: all #{$time}s ease-in-out;
+    transition: all #{$time}s ease-in-out;
+  }

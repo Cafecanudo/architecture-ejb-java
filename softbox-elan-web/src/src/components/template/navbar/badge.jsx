@@ -27,6 +27,11 @@ export default props => {
           <a href="#" className="dropdown-item dropdown-footer">Ver todas as notificações</a>
         </div>
       </li>
+      <li className="nav-item">
+        <a className="nav-link" style={{cursor: 'pointer'}} title="Maximizar Dashboard">
+          <i className="fa fa-window-maximize" aria-hidden="true"></i>
+        </a>
+      </li>
     </ul>
   )
 }
