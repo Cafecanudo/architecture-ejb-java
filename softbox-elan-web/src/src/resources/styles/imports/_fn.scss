@@ -3,4 +3,9 @@
     -moz-transition: all #{$time}s ease-in-out;
     -o-transition: all #{$time}s ease-in-out;
     transition: all #{$time}s ease-in-out;
-  }
+}
+
+@mixin fn-shadown($a, $b, $c, $color) {
+    -webkit-filter: drop-shadow(#{$a}px #{$b}px #{$c}px $color);
+    filter: drop-shadow(#{$a}px #{$b}px #{$c}px $color);
+}
