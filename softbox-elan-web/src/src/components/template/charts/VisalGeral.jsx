@@ -1,61 +1,32 @@
 import React, {Component} from 'react'
+import AmCharts from "@amcharts/amcharts3-react/index";
 
-import AmCharts from '@amcharts/amcharts3-react'
-
-export default class Graf extends Component {
+export default class VisalGeral extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      dataProvider: []
+      dataProvider: [{
+        "date": "2012-07-27",
+        "value": 13
+      }, {
+        "date": "2012-07-28",
+        "value": 11
+      }]
     }
-
-    this.generateData = this.generateData.bind(this)
-    //this.setProvider = this.setProvider.bind(this)
   }
 
-  generateData() {
-    var firstDate = new Date();
-    var dataProvider = [];
-    for (var i = 0; i < 100; ++i) {
-      var date = new Date(firstDate.getTime());
-      date.setDate(i);
-      dataProvider.push({
-        date: date,
-        interval: 0,
-        value: Math.floor(Math.random() * 100)
-      });
-    }
-    return dataProvider;
-  }
-
-  /*setProvider() {
-    this.setState({
-      dataProvider: this.generateData()
-    })
-  }*/
-
-  componentDidMount() {
-    this.interval = setTimeout(() => {
-      this.setState({dataProvider: this.generateData()})
-    }, 3000)
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
+  componentChart() {
     return React.createElement(AmCharts.React, {
       style: {
         width: "100%",
         height: "500px"
       },
-      options: this.getConfig()
+      options: this.config()
     });
   }
 
-  getConfig() {
+  config() {
     return {
       "type": "serial",
       "theme": "light",
@@ -131,13 +102,20 @@ export default class Graf extends Component {
       "export": {
         "enabled": false
       },
-      "dataProvider": [{
-        "date": "2012-07-27",
-        "value": 13
-      }, {
-        "date": "2012-07-28",
-        "value": 11
-      }]
+      "dataProvider": this.state.dataProvider
     }
+  }
+
+  render() {
+    return (
+      <div className="card card-primary card-outline">
+        <div className="card-header">
+          <h6>Visão Geral</h6>
+        </div>
+        <div className="card-body">
+          {this.componentChart()}
+        </div>
+      </div>
+    )
   }
 }
