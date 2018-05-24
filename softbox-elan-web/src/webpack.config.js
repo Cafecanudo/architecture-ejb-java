@@ -6,13 +6,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   entry: [
-    './src/index.jsx'
+    './src/index.jsx',
   ],
   mode: "development",
   devtool: 'source-map',
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: './app.js'
+    path: path.resolve(__dirname, "dist"),
+    filename: './app.js',
   },
   devServer: {
     port: process.env.PORT || 8000,
@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'ELAN | Eldoc Analytics',
-      template: './public/index.html'
+      template: './public/index.html',
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
@@ -40,6 +40,7 @@ module.exports = {
       'window.jQuery': 'jquery'
     }),
     new CopyWebpackPlugin([
+      {from: 'public/import', to: 'import'},
       {from: 'node_modules/font-awesome/fonts', to: 'fonts'},
       {from: 'node_modules/ionicons/dist/fonts', to: 'fonts'}
     ]),
