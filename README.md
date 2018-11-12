@@ -1,4 +1,4 @@
-# Softbox - Architecture EJB3.1, JAX-RS on Java 8
+# Architecture EJB3.1, JAX-RS on Java 8
 Arquitetura para descrever uso EJB e JAX-RAS para serviços RestFul. Modelo simples de fácil implementação para 
 serem usados em projetos que precisem usar Hibernate JPA ou qualquer outra camada de persistência.
 
@@ -58,7 +58,7 @@ o desenvolvedor possa consultar os serviços disponíves afim de não criar um n
 
 # Implmentação
 ### Resource Rest
-Criar dentro do [pacote](softbox-elan-service/src/main/java/br/com/softbox/elan/services/resources)
+Criar dentro do [pacote](elan-service/src/main/java/br/com/elan/services/resources)
 a inteface DemoResource(Nome+Resource).
 Deve existir uma interface para que seja usada as anotações do [Swagger](https://swagger.io/docs/specification/2-0/adding-examples/)
 para documentar o serviço, afim de não deixar a Classe poluída.
